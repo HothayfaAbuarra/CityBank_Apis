@@ -1,0 +1,13 @@
+C:\Users\Habuarra\source\repos\BankSystem\common\bin\Debug\netcoreapp3.1\common.deps.json
+C:\Users\Habuarra\source\repos\BankSystem\common\bin\Debug\netcoreapp3.1\common.runtimeconfig.json
+C:\Users\Habuarra\source\repos\BankSystem\common\bin\Debug\netcoreapp3.1\common.runtimeconfig.dev.json
+C:\Users\Habuarra\source\repos\BankSystem\common\bin\Debug\netcoreapp3.1\common.dll
+C:\Users\Habuarra\source\repos\BankSystem\common\bin\Debug\netcoreapp3.1\common.pdb
+C:\Users\Habuarra\source\repos\BankSystem\common\obj\Debug\netcoreapp3.1\common.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Habuarra\source\repos\BankSystem\common\obj\Debug\netcoreapp3.1\common.AssemblyInfoInputs.cache
+C:\Users\Habuarra\source\repos\BankSystem\common\obj\Debug\netcoreapp3.1\common.AssemblyInfo.cs
+C:\Users\Habuarra\source\repos\BankSystem\common\obj\Debug\netcoreapp3.1\common.csproj.CoreCompileInputs.cache
+C:\Users\Habuarra\source\repos\BankSystem\common\obj\Debug\netcoreapp3.1\common.dll
+C:\Users\Habuarra\source\repos\BankSystem\common\obj\Debug\netcoreapp3.1\common.pdb
+C:\Users\Habuarra\source\repos\BankSystem\common\obj\Debug\netcoreapp3.1\common.genruntimeconfig.cache
+C:\Users\Habuarra\source\repos\BankSystem\common\obj\Debug\netcoreapp3.1\common.csproj.AssemblyReference.cache
