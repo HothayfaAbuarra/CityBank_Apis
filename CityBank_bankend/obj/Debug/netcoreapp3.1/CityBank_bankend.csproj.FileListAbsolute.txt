@@ -127,3 +127,4 @@ C:\Users\Habuarra\source\repos\CityBank_bankend\CityBank_bankend\bin\Debug\netco
 C:\Users\Habuarra\source\repos\CityBank_bankend\CityBank_bankend\bin\Debug\netcoreapp3.1\IdentityServer4.Storage.dll
 C:\Users\Habuarra\source\repos\CityBank_bankend\CityBank_bankend\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.OpenIdConnect.dll
 C:\Users\Habuarra\source\repos\CityBank_bankend\CityBank_bankend\bin\Debug\netcoreapp3.1\BCrypt.Net-Next.dll
+C:\Users\Habuarra\source\repos\CityBank_bankend\CityBank_bankend\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll

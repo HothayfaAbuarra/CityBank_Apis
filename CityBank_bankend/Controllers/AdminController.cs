@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using DAL;
 using common;
 using Microsoft.AspNetCore.Cors;
+using System.Net;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CityBank_bankend.Controllers
 {
@@ -23,9 +25,10 @@ namespace CityBank_bankend.Controllers
         }
 
         #region Api for creating BankAccount
+        [Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost]
         [Route("/api/Admin/CreateAccount")]
-        public Guid CreateCustomer( CustomerAccountModel cusomter)
+        public Guid CreateCustomer( CustomerAccount cusomter)
         {
             if (cusomter == null)
             {
@@ -38,9 +41,10 @@ namespace CityBank_bankend.Controllers
         #endregion
 
         #region Api for getting customer account
+        [Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet]
         [Route("/api/Admin/GetCustomer/{id:int}")]
-        public CustomerBankAccountModel GetCustomer(int id)
+        public CustomerBankAccount GetCustomer(int id)
         {
             AdminRepositrory ar = AdminRepositrory.GetInstance();
             var result=ar.GetCustomer(id);
@@ -49,9 +53,10 @@ namespace CityBank_bankend.Controllers
         #endregion
 
         #region Api for Updating account
+        [Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
         [HttpPut]
         [Route("/api/Admin/UpdateAccount")]
-        public bool UpdateAccount(CustomerBankAccountModel Customer)
+        public bool UpdateAccount(CustomerBankAccount Customer)
         {
             if (Customer == null)
             {
@@ -64,6 +69,7 @@ namespace CityBank_bankend.Controllers
         #endregion
 
         #region Api for deleting BankAccount
+        [Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
         [HttpDelete]
         [Route("/api/Admin/DeleteAccount/{id:int}")]
         public bool DeleteAccount(int id)

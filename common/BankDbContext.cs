@@ -7,11 +7,11 @@ namespace common
 {
     public class BankdbContext : DbContext
     {
-        public DbSet<CustomersModel> Customers { get; set; }
-        public DbSet<BankAccountsModel> BankAccounts { get; set; }
-        public DbSet<BalancesModel> Balances { get; set; }
-        public DbSet<EmployeesModel> Employees { get; set; }
-        public DbSet<DepartmentsModel> Departments { get; set; }
+        public DbSet<Customers> Customers { get; set; }
+        public DbSet<BankAccounts> BankAccounts { get; set; }
+        public DbSet<Balances> Balances { get; set; }
+        public DbSet<Employees> Employees { get; set; }
+        public DbSet<Departments> Departments { get; set; }
         public DbSet<RolesModel> Roles { get; set; }
 
 

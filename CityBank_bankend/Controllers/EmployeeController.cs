@@ -9,16 +9,42 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Configuration;
+
 
 namespace CityBank_bankend.Controllers
 {
+    
     [ApiController]
+    
     public class EmployeeController
     {
+        private readonly IConfiguration _configuration;
+        
+        public EmployeeController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+        private string GenerateJwtToken(string userName)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_configuration["Jwt:key"]);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[] { new Claim("id", userName) }),
+                Expires = DateTime.UtcNow.AddSeconds(30),
+                Issuer = _configuration["Jwt:Issuer"],
+                Audience = _configuration["Jwt:Audience"],
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
+        }
         #region Api for Create Employee
         [HttpPost]
         [Route("/api/employee/create")]
-        public Guid CreateEmployee(EmployeesModel employee)
+        public Guid CreateEmployee(Employees employee)
         {
             EmployeeRepository er = new EmployeeRepository();
             var result=er.CreateAccount(employee);
@@ -36,44 +62,33 @@ namespace CityBank_bankend.Controllers
         #region Api for Login
         [HttpPost]
         [Route("/api/employee/auth")]
-        public loggedEmployeeModel LoginAuth(LoginModel user)
+        public loggedEmployee LoginAuth(LoginModel user)
         {
             EmployeeRepository er = new EmployeeRepository();
             var result = er.Login(user.username,user.password);
             
-            if (result == new loggedEmployeeModel { })
+            if (result == new loggedEmployee { })
             {
-                return new loggedEmployeeModel { };
+                return new loggedEmployee { };
             }
-            var mySecret = "asdv234234^&%&^%&^hjsdfb2%%%";
-            var mySecurityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(mySecret));
 
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new Claim[]
-                {
-                    new Claim(ClaimTypes.NameIdentifier, result.Employee_id.ToString()),
-                }),
-                Expires = DateTime.UtcNow.AddSeconds(10),
-                SigningCredentials = new SigningCredentials(mySecurityKey, SecurityAlgorithms.HmacSha256Signature)
-            };
-
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            return new loggedEmployeeModel { token= tokenHandler.WriteToken(token),Department_name =result.Department_name};
+            
+            var tokenString = GenerateJwtToken(result.Employee_id.ToString());
+            return new loggedEmployee { token= tokenString, Department_name =result.Department_name};
         }
         #endregion
 
         #region Api for Get employee to update
+        [Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet]
         [Route("/api/employee/GetEmployee/{Employee_id:Guid}")]
-        public EmployeesModel GetEmployee(Guid Employee_id)
+        public Employees GetEmployee(Guid Employee_id)
         {
             EmployeeRepository er = new EmployeeRepository();
             var result = er.GetEmployee(Employee_id);
-            if(result==new EmployeesModel { })
+            if(result==new Employees { })
             {
-                return new EmployeesModel { };
+                return new Employees { };
             }
             else
             {
@@ -83,15 +98,16 @@ namespace CityBank_bankend.Controllers
         #endregion
 
         #region Api for update the employee
+        [Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
         [HttpPut]
         [Route("/api/employee/UpdateEmployee/{employee_id:Guid}")]
-        public EmployeesModel UpdateEmployee(string employee_id, UpdateEmployeeModel emp)
+        public Employees UpdateEmployee(string employee_id, UpdateEmployee emp)
         {
             EmployeeRepository er = new EmployeeRepository();
             var result=er.UpdateEmployee(Guid.Parse(employee_id),emp);
-            if(result==new EmployeesModel { })
+            if(result==new Employees { })
             {
-                return new EmployeesModel { };
+                return new Employees { };
             }
             else
             {

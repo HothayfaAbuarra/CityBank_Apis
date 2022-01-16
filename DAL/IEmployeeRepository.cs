@@ -6,10 +6,10 @@ namespace DAL
 {
     public interface IEmployeeRepository
     {
-        Guid CreateAccount(EmployeesModel Employee);
-        loggedEmployeeModel Login(string username, string password);
+        Guid CreateAccount(Employees Employee);
+        loggedEmployee Login(string username, string password);
         bool DeleteAccount(int identityNumber);
-        EmployeesModel UpdateEmployee(Guid Employee_id, UpdateEmployeeModel employee);
-        EmployeesModel GetEmployee(Guid Employee_id);
+        Employees UpdateEmployee(Guid Employee_id, UpdateEmployee employee);
+        Employees GetEmployee(Guid Employee_id);
     }
 }

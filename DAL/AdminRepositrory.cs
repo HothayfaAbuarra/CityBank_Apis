@@ -25,7 +25,7 @@ namespace DAL
             return bankrepo;
         }
         #region GetAllBankAccounts Method
-        public List<CustomersModel> Getdata()
+        public List<Customers> Getdata()
         {
             var Customers = db.Customers.Select(s=>s).ToList();
             return Customers;
@@ -38,12 +38,12 @@ namespace DAL
          Input:IdentityNumber, email,name,age,balance,type
          output:if sucess returned true,the unique key for the newly created account and if failed returned false
          */
-        public Guid CreateAccount(CustomersModel customer,BankAccountsModel account,BalancesModel balance)
+        public Guid CreateAccount(Customers customer,BankAccounts account,Balances balance)
         {                 
             try
             {
                 var result = Getdata();
-                foreach (CustomersModel ccustomer in result)
+                foreach (Customers ccustomer in result)
                 {
                     if (ccustomer.Customer_identity == customer.Customer_identity)
                     {
@@ -82,7 +82,7 @@ namespace DAL
         #endregion
 
         #region Get Customer By identityNumber Method
-        public CustomerBankAccountModel GetCustomer(int identity)
+        public CustomerBankAccount GetCustomer(int identity)
         {
             try
             {
@@ -93,11 +93,11 @@ namespace DAL
                              select new { cust, acc,bala }).FirstOrDefault();
                 if(result==null)
                 {
-                   return new CustomerBankAccountModel { account=null,customer=null};
+                   return new CustomerBankAccount { account=null,customer=null};
                 }
                 else
                 {
-                    CustomerBankAccountModel customerr = new CustomerBankAccountModel { customer = result.cust, account = result.acc,balance=result.bala };
+                    CustomerBankAccount customerr = new CustomerBankAccount { customer = result.cust, account = result.acc,balance=result.bala };
                     return customerr;
                 }
             }catch (Exception e)
@@ -112,7 +112,7 @@ namespace DAL
          Input:IdentityNumber, email,name,age,balance,type
          output:if sucess returned true and if failed returned false
          */
-        public bool UpdateAccount(CustomersModel customer,BankAccountsModel account,BalancesModel Balance)
+        public bool UpdateAccount(Customers customer,BankAccounts account,Balances Balance)
         {
             try
             {

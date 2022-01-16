@@ -9,6 +9,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using CityBank_bankend.Models;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+
 namespace CityBank_bankend
 {
     public class Startup
@@ -23,10 +28,43 @@ namespace CityBank_bankend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var builder=services.AddIdentityServer()
+                                .AddDeveloperSigningCredential()
+                                .AddInMemoryApiScopes(Config.ApiScopes)
+                                .AddInMemoryClients(Config.Clients);
             services.AddCors();
             services.AddControllersWithViews();
             services.AddSwaggerGen();
-            
+            //services.AddAuthentication("Bearer").AddJwtBearer("Bearer", options =>
+            //{
+            //    options.Authority = "https://localhost:44336";
+            //    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+            //    {
+            //        ValidateAudience = false
+            //    };
+            //});
+    
+
+            services.AddAuthentication(option =>
+            {
+                option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+            }).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = false,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = Configuration["Jwt:Issuer"],
+                    ValidAudience = Configuration["Jwt:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"])) //Configuration["JwtToken:SecretKey"]
+                };
+            });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,9 +85,14 @@ namespace CityBank_bankend
             .AllowAnyHeader()
             .SetIsOriginAllowed(origin => true) // allow any origin
             .AllowCredentials()); // allow credentials
+           // app.UseIdentityServer();
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSwagger();
+            
+
+
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My Test1 Api v1");

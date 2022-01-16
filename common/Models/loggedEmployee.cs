@@ -4,7 +4,7 @@ using System.Text;
 
 namespace common
 {
-    public class loggedEmployeeModel
+    public class loggedEmployee
     {
         public Guid Employee_id { get; set; }
 

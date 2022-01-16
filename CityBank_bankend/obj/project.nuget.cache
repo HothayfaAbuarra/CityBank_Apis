@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Q2Xu0eAL/Cs1pemEgz+Nz4DGiG3jTCAgpSqrsoZoQbAFkVemuh15yRRUO+mPqD6maXxDoiQJyiojVwS3d1WAyA==",
+  "dgSpecHash": "DOQ1nLXbnAVg2z4p2yL0C8GZ2A0Y2XmHu9ok8vQOsUDGa3YmGf4fbeK0FKX6EjwKWts/bz3tanoZuyZbrumTEA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Habuarra\\source\\repos\\CityBank_bankend\\CityBank_bankend\\CityBank_bankend.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,7 @@
     "C:\\Users\\Habuarra\\.nuget\\packages\\identitymodel\\4.4.0\\identitymodel.4.4.0.nupkg.sha512",
     "C:\\Users\\Habuarra\\.nuget\\packages\\identityserver4\\4.1.2\\identityserver4.4.1.2.nupkg.sha512",
     "C:\\Users\\Habuarra\\.nuget\\packages\\identityserver4.storage\\4.1.2\\identityserver4.storage.4.1.2.nupkg.sha512",
+    "C:\\Users\\Habuarra\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.1.16\\microsoft.aspnetcore.authentication.jwtbearer.3.1.16.nupkg.sha512",
     "C:\\Users\\Habuarra\\.nuget\\packages\\microsoft.aspnetcore.authentication.openidconnect\\3.1.0\\microsoft.aspnetcore.authentication.openidconnect.3.1.0.nupkg.sha512",
     "C:\\Users\\Habuarra\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.11\\microsoft.aspnetcore.cryptography.internal.5.0.11.nupkg.sha512",
     "C:\\Users\\Habuarra\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\5.0.11\\microsoft.aspnetcore.cryptography.keyderivation.5.0.11.nupkg.sha512",

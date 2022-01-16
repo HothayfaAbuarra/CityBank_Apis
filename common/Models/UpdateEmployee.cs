@@ -4,7 +4,7 @@ using System.Text;
 
 namespace common
 {
-    public class UpdateEmployeeModel
+    public class UpdateEmployee
     {
         public string Employee_username { get; set; }
         public string Employee_Email { get; set; }

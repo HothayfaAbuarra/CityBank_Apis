@@ -6,8 +6,8 @@ namespace DAL
 {
     public interface iAdminRepository
     {
-        Guid CreateAccount(CustomersModel customer,BankAccountsModel account,BalancesModel balance);
-        bool UpdateAccount(CustomersModel customer,BankAccountsModel account,BalancesModel balance);
+        Guid CreateAccount(Customers customer,BankAccounts account,Balances balance);
+        bool UpdateAccount(Customers customer,BankAccounts account,Balances balance);
         bool DeleteAccount(int identity_number);
 
     }

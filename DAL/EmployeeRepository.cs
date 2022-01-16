@@ -10,7 +10,7 @@ namespace DAL
         BankdbContext db = new BankdbContext();
 
         #region Method for Insert Employee to DB
-        public Guid CreateAccount(EmployeesModel Employee)
+        public Guid CreateAccount(Employees Employee)
         {
            
             try
@@ -73,7 +73,7 @@ namespace DAL
         #endregion
 
         #region Method for test login
-        public loggedEmployeeModel Login(string username,string password)
+        public loggedEmployee Login(string username,string password)
         {
             try
             {
@@ -82,7 +82,7 @@ namespace DAL
                               select employee).FirstOrDefault();
                 if (result == null)
                 {
-                    return new loggedEmployeeModel { };
+                    return new loggedEmployee { };
                 }
 
                 bool validCredintials = BCrypt.Net.BCrypt.Verify(password,result.Employee_password);
@@ -91,11 +91,11 @@ namespace DAL
                     var departmentResult = (from department in db.Departments
                                             where department.Department_id == result.Department_id
                                             select department.Department_name).FirstOrDefault();
-                    return new loggedEmployeeModel {Department_name=departmentResult,Employee_id=result.Employee_id};
+                    return new loggedEmployee {Department_name=departmentResult,Employee_id=result.Employee_id};
                 }
                 else
                 {
-                    return new loggedEmployeeModel { };
+                    return new loggedEmployee { };
                 }
             }catch(Exception e)
             {
@@ -105,7 +105,7 @@ namespace DAL
         #endregion
 
         #region Method for get employee
-        public EmployeesModel GetEmployee(Guid Employee_id)
+        public Employees GetEmployee(Guid Employee_id)
         {
             try
             {
@@ -114,7 +114,7 @@ namespace DAL
                               select emp).FirstOrDefault();
                 if (result == null)
                 {
-                    return new EmployeesModel { };
+                    return new Employees { };
                 }
                 else
                 {
@@ -129,7 +129,7 @@ namespace DAL
         #endregion
 
         #region Method for update employee account
-        public EmployeesModel UpdateEmployee(Guid Emplyee_id, UpdateEmployeeModel employee)
+        public Employees UpdateEmployee(Guid Emplyee_id, UpdateEmployee employee)
         {
             try
             {
@@ -138,7 +138,7 @@ namespace DAL
                               select emp).FirstOrDefault();
                 if (result == null)
                 {
-                    return new EmployeesModel { };
+                    return new Employees { };
                 }
                 else
                 {
